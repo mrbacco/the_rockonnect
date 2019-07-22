@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h2 Discussions: 
+    
+    h3= "name: " + thread.title
+    h4= "about :"
+    p= thread.content
+
+    img(src= "/"+thread.image , style="width:50%; height:50%")
+  

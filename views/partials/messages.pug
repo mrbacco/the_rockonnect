@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+
+| <% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) { %>
+.alert.alert-warning.alert-dismissible.fade.show(role='alert')
+  | <%= error.msg %>
+  button.close(type='button', data-dismiss='alert', aria-label='Close')
+    span(aria-hidden='true') ×
+| <% }); %> <% } %> <% if(success_msg != ''){ %>
+.alert.alert-success.alert-dismissible.fade.show(role='alert')
+  | <%= success_msg %>
+  button.close(type='button', data-dismiss='alert', aria-label='Close')
+    span(aria-hidden='true') ×
+| <% } %> <% if(error_msg != ''){ %>
+.alert.alert-danger.alert-dismissible.fade.show(role='alert')
+  | <%= error_msg %>
+  button.close(type='button', data-dismiss='alert', aria-label='Close')
+    span(aria-hidden='true') ×
+| <% } %> <% if(error != ''){ %>
+.alert.alert-danger.alert-dismissible.fade.show(role='alert')
+  | <%= error %>
+  button.close(type='button', data-dismiss='alert', aria-label='Close')
+    span(aria-hidden='true') ×
+| <% } %>

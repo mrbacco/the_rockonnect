@@ -1,0 +1,33 @@
+extends layout
+
+block content
+
+            .main.container
+            .row
+              .col-md-6.col-md-offset-3
+                img(src="../images/guitar-25701.svg", style="width:60%;height:60%;")
+
+              .col-md-6.col-md-offset-3
+                h1.display-4.m-b-2 Post a thread ...
+                h2 welcome #{user.username} !
+                // add thread form
+                form(action='/forum', method='POST', enctype='multipart/form-data')
+                    if user
+                    div.form-group 
+                      label(for='user') user: 
+                      input#user.form-control(name='user', value = user.username)
+                    div.form-group
+                      label(for='title') title:
+                      input#title.form-control(type='text', name='title')
+                    div.form-group
+                      label(for='content') content:
+                      textarea#content.form-control(type='text' name='content')
+                    div.form-group
+                      label(for='content') image:
+                      .file-field.input-field
+                        .btn.grey
+                          span File
+                          input(name='img', type='file')
+                        .file-path-wrapper
+                    button.btn.btn-primary(type='submit') Post thread
+                      

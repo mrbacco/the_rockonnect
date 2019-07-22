@@ -1,0 +1,11 @@
+.bkimg {
+    background-image: url(/images/rockonnect.jpg);
+}
+
+.error {
+    color: rgb(255, 140, 0);
+}
+
+.error1 {
+    color: rgb(0, 255, 0);
+}

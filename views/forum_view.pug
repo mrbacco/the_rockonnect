@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1 #{title}
+        .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 Discussion forum...
+
+        // view the thread!
+        ul.list-group
+        each thread, i in threads
+            li.list-group-item
+                a(href="/forum/"+thread.id)= thread.title
