@@ -3,9 +3,11 @@ extends layout
 block content
     h2 Discussions: 
     
-    h3= "name: " + thread.title
-    h4= "about :"
-    p= thread.content
 
+    h4= "title: " + thread.title
+    h4= "from: " + thread.user
+    h4= "about :" 
+    p= thread.content
+    br
     img(src= "/"+thread.image , style="width:50%; height:50%")
   
