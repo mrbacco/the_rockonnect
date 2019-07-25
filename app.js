@@ -24,6 +24,7 @@ const session = require("express-session");
 const validator = require("express-validator"); //for session validation
 const cookiep = require("cookie-parser");
 const passport = require("passport");
+const socketIO = require('socket.io');
 
 //var pop = require("popups"); // for message on the UI
 require("./config/passport")(passport);
@@ -58,8 +59,11 @@ var Thread = require("./models/threads");
 
 // loading the views by using Pug and setting views and directory
 app.set("views", path.join(__dirname, "views"));
-app.use("/static", express.static(path.join(__dirname, "static")));
+
+app.use(express.static(path.join(__dirname, "static")));
 app.use('/static', express.static('public'));
+app.use("/static", express.static(path.join(__dirname, "static")));
+
 app.set("view engine", "pug");
 
 //########### Routers START###########
@@ -376,7 +380,7 @@ function isLoggedIn(req, res, next) {
 
 
 app.get("/forum_add", isLoggedIn, (req, res) => {
-    res.render("forum_add", {
+    res.render("users_list", {
             user: req.user // user from session on passport only
         }, console.log("viewing a protected page forum_add for user " + req.user.username)),
         console.log("/forum_add page now with isLoggedIn function, please sign in to view this page");
