@@ -212,7 +212,8 @@ app.get("/users_list/:id", isLoggedIn, function(req, res) { //only logged in use
             console.log(err)
         } else {
             res.render("users_list", {
-                user: newUser //showing the selected users profile
+                user: newUser, //showing the selected users profile
+                image: "/static/default.png"
             });
             console.log("bravo bacco, showing " + newUser + " now under /users_list/");
             return;

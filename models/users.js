@@ -25,8 +25,11 @@ var userSchema = mongoose.Schema({
     },
     userImage : {
 		type:String,
-		default:'default.png'
-	},
+		default:"static/uploads/default.png"
+    },
+    friends: [{
+        username : String
+    }]
 });
 
 //export the db schema to be used in the registration etc ...
