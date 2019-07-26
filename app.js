@@ -213,7 +213,7 @@ app.get("/users_list/:id", isLoggedIn, function(req, res) { //only logged in use
         } else {
             res.render("users_list", {
                 user: newUser, //showing the selected users profile
-                image: "/static/default.png"
+                image: "F/static/default.png"
             });
             console.log("bravo bacco, showing " + newUser + " now under /users_list/");
             return;
@@ -381,7 +381,7 @@ function isLoggedIn(req, res, next) {
 
 
 app.get("/forum_add", isLoggedIn, (req, res) => {
-    res.render("users_list", {
+    res.render("forum_add", {
             user: req.user // user from session on passport only
         }, console.log("viewing a protected page forum_add for user " + req.user.username)),
         console.log("/forum_add page now with isLoggedIn function, please sign in to view this page");
