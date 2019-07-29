@@ -208,8 +208,8 @@ app.post("/users/add", (req, res) => {
 });
 
 
-let view_u;
-let view_id;
+let view_u; //global variable
+let view_id; //global variable
 // route to get a single user [user "a" wants to look profile of user "b"]
 app.get("/users_list/:id", isLoggedIn, function(req, res) { //only logged in users can see other users full profile
     User.findById(req.params.id, function(err, newUser) {
