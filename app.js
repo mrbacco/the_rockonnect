@@ -53,9 +53,11 @@ mongoose.connect(conn, { useNewUrlParser: true })
 
 //########### DB stuff end ###########
 
-//loading models for the two main pages, users and threads
+//loading models for the two main pages, users, threads and friends
 var User = require("./models/users");
 var Thread = require("./models/threads");
+var Friend = require("./models/friends");
+
 
 // loading the views by using Pug and setting views and directory
 app.set("views", path.join(__dirname, "views"));
@@ -205,22 +207,38 @@ app.post("/users/add", (req, res) => {
     });
 });
 
+
+let view_u;
+let view_id;
 // route to get a single user [user "a" wants to look profile of user "b"]
 app.get("/users_list/:id", isLoggedIn, function(req, res) { //only logged in users can see other users full profile
     User.findById(req.params.id, function(err, newUser) {
         if (err) {
             console.log(err)
         } else {
-            res.render("users_list", {
-                user: newUser, //showing the selected users profile
-                image: "/static/default.png"
-            });
+            view_u = newUser.username;
+            view_id= newUser._id;
+            Friend.find({username: view_u}, function(err, friends) { //the User var here is the one in users.js [mongoose.model("User", userSchema);]
+            if (err) {
+                console.log(err)
+            } else {
+                res.render("users_list", {
+                    user: newUser, //showing the selected users profile
+                    image: "/static/default.png",
+                    title: "my friends list",
+                    friends: friends //showing all the users
+                });
+                console.log("under /update_friends now");
+            }
+        });
             console.log("bravo bacco, showing " + newUser.username + " now under /users_list/");
+            console.log(view_u);
             return;
         }
-        
+
     });
 });
+
 
 
 // route to get a single thread [user "a" wants to look thread "b" details]
@@ -391,15 +409,22 @@ app.get("/forum_add", isLoggedIn, (req, res) => {
 
 
 // add users to list
-app.get("/update_friends", isLoggedIn, (req, res) =>{
-    res.render("users_list", {
-        user:req.user, // user from session on passport
-    }, console.log("viewing a protected page update_friends for user " + req.user.username))
-});
-
+// app.get("/update_friends", isLoggedIn, (req, res) =>{
+//     Friend.find({username: req.user.username}, function(err, friends) { //the User var here is the one in users.js [mongoose.model("User", userSchema);]
+//         if (err) {
+//             console.log(err)
+//         } else {
+//             res.render("update_friends", {
+//                 title: "my friends list",
+//                 friends: friends, //showing all the users
+//             });
+//             console.log("under /update_friends now");
+//         }
+//     });
+// });
 
 app.post("/update_friends", isLoggedIn, (req, res) =>{
-    res.render("users_list", 
+    res.render("home", 
         {
         user:req.user, // user from session on passport
         id: req.user.id,
@@ -413,7 +438,8 @@ app.post("/update_friends", isLoggedIn, (req, res) =>{
             dbo.collection("friends").insertOne({
                 username:req.user.username, // user from session on passport, loggedin user
                 // friend_name: need to put the username of the user whose page is visualized  
-                
+                view_u: view_u,
+                view_id: view_id
                 }, function(err, res, next) {
                 if (err) {
                     console.log(err + " what error is sthis");

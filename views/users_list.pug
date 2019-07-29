@@ -22,3 +22,10 @@ block content
         .col-md-6.col-md-offset-3
             img(src="/"+ user.userImage, style="width:40%; height:50%")
         .row
+            .col-md-6.col-md-offset-3
+            h3.display-4.m-b-2 #{user.username} Friends
+            ul.list-group
+                each friend, i in friends
+                    li.list-group-item
+                        a(href="/users_list/"+friend.view_id)= friend.view_u
+            .col-md-6.col-md-offset-3
