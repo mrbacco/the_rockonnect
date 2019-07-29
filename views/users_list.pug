@@ -8,16 +8,17 @@ block content
         
             h1.display-4.m-b-2
             h2 welcome to the page of:
-            form(method='POST' action='/...')
-            div.form-group 
-                h1 #{user.username}
-            div.form-group 
-                label(for='full_name')  
-                h3= "Name: " + user.name, + user.surname
-            div.form-group 
-                label(for='ABOUT') About #{user.username}:
-                p= user.about
-            button.btn.btn-primary(type='submit') follow me!
+            form(method='POST' action= "/update_friends")
+                div.form-group 
+                    h1 #{user.username}
+                div.form-group 
+                    label(for='full_name')
+                    h3= "Name: " + user.name, + user.surname
+                div.form-group 
+                    label(for='ABOUT') About #{user.username}:
+                    p= user.about
+                button.btn.btn-primary(type='submit') follow me!
     
         .col-md-6.col-md-offset-3
             img(src="/"+ user.userImage, style="width:40%; height:50%")
+        .row

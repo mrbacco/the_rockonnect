@@ -213,13 +213,15 @@ app.get("/users_list/:id", isLoggedIn, function(req, res) { //only logged in use
         } else {
             res.render("users_list", {
                 user: newUser, //showing the selected users profile
-                image: "F/static/default.png"
+                image: "/static/default.png"
             });
-            console.log("bravo bacco, showing " + newUser + " now under /users_list/");
+            console.log("bravo bacco, showing " + newUser.username + " now under /users_list/");
             return;
         }
+        
     });
 });
+
 
 // route to get a single thread [user "a" wants to look thread "b" details]
 app.get("/threads_list/:id", function(req, res) { //same code as above for threads...
@@ -327,7 +329,7 @@ app.post("/users/signin", function(req, res) {
 */
 
 // USERS LOGIN WITH PASSPORT only ...
-app.post("/users/signin", passport.authenticate('local', {
+app.post("/users/signin", passport.authenticate("local", {
     successRedirect: "/forum_add", // redirect to secure page forum_add
     failureRedirect: "/users/signin/", // redirect back to the signup page if there is an error
     failureMessage: isLoggedIn // allow failure messages
@@ -382,10 +384,47 @@ function isLoggedIn(req, res, next) {
 
 app.get("/forum_add", isLoggedIn, (req, res) => {
     res.render("forum_add", {
-            user: req.user // user from session on passport only
+        user: req.user // user from session on passport only
         }, console.log("viewing a protected page forum_add for user " + req.user.username)),
         console.log("/forum_add page now with isLoggedIn function, please sign in to view this page");
 });
+
+
+// add users to list
+app.get("/update_friends", isLoggedIn, (req, res) =>{
+    res.render("users_list", {
+        user:req.user, // user from session on passport
+    }, console.log("viewing a protected page update_friends for user " + req.user.username))
+});
+
+
+app.post("/update_friends", isLoggedIn, (req, res) =>{
+    res.render("users_list", 
+        {
+        user:req.user, // user from session on passport
+        id: req.user.id,
+        
+        }, console.log("updating the friends' list of  " + req.user.username));
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb+srv://mrbacco:mongodb001@cluster0-goutv.mongodb.net/users?retryWrites=true";
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("users");
+            dbo.collection("friends").insertOne({
+                username:req.user.username, // user from session on passport, loggedin user
+                // friend_name: need to put the username of the user whose page is visualized  
+                
+                }, function(err, res, next) {
+                if (err) {
+                    console.log(err + " what error is sthis");
+                    return;
+                } else {
+                    console.log("under friends page now, new friend has been added to the list");
+                }
+            });
+        });
+    });
+
 
 /*
 app.get("/forum_add", (req, res, next) => {

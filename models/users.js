@@ -25,9 +25,10 @@ var userSchema = mongoose.Schema({
     },
     userImage : {
 		type:String,
-		default:"static/uploads/default.png"
+		default:"static/uploads/default1.png"
     },
     friends: [{
+        id: String,
         username : String
     }]
 });
