@@ -5,27 +5,31 @@ block content
 
     .row
         .col-md-6.col-md-offset-3
-        
-            h1.display-4.m-b-2
             h2 welcome to the page of:
             form(method='POST' action= "/update_friends")
                 div.form-group 
-                    h1 #{user.username}
+                    h1.display-4.m-b-2 #{user.username}
                 div.form-group 
                     label(for='full_name')
                     h3= "Name: " + user.name, + user.surname
                 div.form-group 
                     label(for='ABOUT') About #{user.username}:
                     p= user.about
+                br
+                img(src="/"+ user.userImage, style="width:40%; height:50%")
+                br
+                br
+
                 button.btn.btn-primary(type='submit') follow me!
-    
+
+
         .col-md-6.col-md-offset-3
-            img(src="/"+ user.userImage, style="width:40%; height:50%")
-        .row
-            .col-md-6.col-md-offset-3
-            h3.display-4.m-b-2 #{user.username} Friends
+            br
+            h3 #{user.username} Friends
             ul.list-group
                 each friend, i in friends
                     li.list-group-item
                         a(href="/users_list/"+friend.view_id)= friend.view_u
-            .col-md-6.col-md-offset-3
+            .row
+                
+                        
