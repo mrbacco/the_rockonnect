@@ -34,4 +34,4 @@ var userSchema = mongoose.Schema({
 });
 
 //export the db schema to be used in the registration etc ...
-var Users = module.exports = mongoose.model("User", userSchema); 
+var Users = module.exports = mongoose.model("User", userSchema);

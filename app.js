@@ -1,20 +1,20 @@
 /* 
-NCI final project: Higher Diploma in Science and Web technologies
-Author: Andrea Baccolini
-Student number: 18147518
-email: x18147518@student.ncirl.ie
+NCI final project:  Higher Diploma in Science in Web technologies
+Author:             ANDREA BACCOLINI
+Student number:     18147518
+Student email:      x18147518@student.ncirl.ie
 */
 // definition of the constants to use in the main "app" which is the server side
 const express = require("express");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); //used only if enabling the session by jsonwebtoken
 const app = express(); //initialization of the application definition of the constant app
-const mongo = require('mongodb'); // constant for the databse 
+const mongo = require('mongodb'); // constant for the database 
 const path = require("path");
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const flash = require("connect-flash");
-const router = express.Router();
-const fs = require('fs');
+const mongoose = require("mongoose"); // constant for the database 
+const bcrypt = require("bcryptjs"); // constant for the password encryption
+const flash = require("connect-flash"); //for messages
+const router = express.Router(); //actual web server
+const fs = require('fs'); //filesystem
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const GStorage = require("multer-gridfs-storage");
@@ -138,7 +138,7 @@ app.get("/users1", function(req, res) { //update code to read from the table in 
         } else {
             res.render("users1", {
                 title: "rockonnect",
-                users: users, //showing all the users
+                users: users, //showing all the users registered in the app
             });
             console.log("under /users1 now");
         }

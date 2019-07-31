@@ -17,4 +17,4 @@ var friendSchema = mongoose.Schema({
 });
 
 //export the db schema to be used in the add friends etc ...
-var Friends = module.exports = mongoose.model("Friends", friendSchema); 
+var Friends = module.exports = mongoose.model("Friends", friendSchema);
