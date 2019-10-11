@@ -98,7 +98,8 @@ app.use('/index', usersRouter);
 const storage = multer.diskStorage({
     destination: "./static/uploads/",
     filename: function(req, file, call_b) {
-        call_b(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname), //using multer library for upload renaming the file with timestamp to make it unique
+        call_b(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname), 
+        //using multer library for upload renaming the file with timestamp to make it unique
             console.log("file is created with name " + file.fieldname + "_" + Date.now() + path.extname(file.originalname)))
     }
 });
