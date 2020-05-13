@@ -47,8 +47,8 @@ app.use(flash());
 
 //########### DB stuff START ###########
 const conn = require('./config/dbase').mongoURI;
-mongoose.connect(conn, { useNewUrlParser: true })
-    .then(() => console.log("conncetion to " + db + " established"))
+mongoose.connect(conn, {useUnifiedTopology: true, useNewUrlParser: true,})
+    .then(() => console.log("connection to " + db + " established"))
     .catch(err => console.log(err));
 
 //########### DB stuff end ###########
