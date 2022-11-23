@@ -31,7 +31,7 @@
     "pug": "^2.0.4",
     "redis": "^2.8.0",
     "shortid": "^2.2.15",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.5.0"
   },
   "devDependencies": {},
   "repository": {
