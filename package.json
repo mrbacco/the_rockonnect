@@ -28,7 +28,7 @@
     "nodemon": "^1.19.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "redis": "^2.8.0",
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0"
